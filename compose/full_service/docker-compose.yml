@@ -4,7 +4,7 @@ services:
     image: nginx:latest    
     container_name: nginx-webserver      
     volumes:
-      - ../../config/conf.d/:/etc/nginx/conf.d/
+      - ../../config/sites-available/:/etc/nginx/sites-available/
       - ../../config/nginx_conf/nginx.conf:/etc/nginx/nginx.conf
       - ../../www:/www
       - ../../config/fastcgi/fastcgi_params:/etc/nginx/fastcgi_params        
@@ -57,3 +57,12 @@ services:
       - ./jenkins_home:/var/jenkins_home
     environment:
       TZ: "Asia/Seoul"
+      
+  tizenenv:
+    build: ../../docker/tizen-env/
+    container_name: tizenenv
+    restart: always
+    ports:
+        - "2222:22"
+    environment:
+         TZ: "Asia/Seoul"      
